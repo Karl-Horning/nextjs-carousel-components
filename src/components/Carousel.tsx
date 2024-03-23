@@ -4,39 +4,62 @@ import { useState, useEffect, useCallback } from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import { RxDotFilled } from "react-icons/rx";
 
+/**
+ * Represents a slide with its URL.
+ */
 type Slide = {
     url: string;
 };
 
+/**
+ * Props for the Carousel component.
+ */
 interface CarouselProps {
-    slides: Slide[];
-    slideDelay: number;
+    slides: Slide[]; // Array of slides to display in the carousel
+    slideDelay: number; // Delay between slides in seconds
 }
 
+/**
+ * Carousel component.
+ * @param {CarouselProps} slides - Array of slides to display.
+ * @param {CarouselProps} slideDelay - Delay between slides in seconds.
+ */
 export default function Carousel({ slides, slideDelay }: CarouselProps) {
     const [currentIndex, setCurrentIndex] = useState(0);
 
+    /**
+     * Moves to the previous slide.
+     */
     const prevSlide = () => {
         setCurrentIndex((prevIndex) =>
             prevIndex === 0 ? slides.length - 1 : prevIndex - 1
         );
     };
 
+    /**
+     * Moves to the next slide.
+     */
     const nextSlide = useCallback(() => {
         setCurrentIndex((prevIndex) =>
             prevIndex === slides.length - 1 ? 0 : prevIndex + 1
         );
     }, [slides.length]);
 
+    /**
+     * Navigates to the specified slide.
+     * @param {number} slideIndex - Index of the slide to navigate to.
+     */
     const goToSlide = (slideIndex: number) => {
         setCurrentIndex(slideIndex);
     };
 
+    // Effect to handle automatic slide transition
     useEffect(() => {
         const slideInterval = setInterval(() => {
             nextSlide();
         }, 1000 * slideDelay);
 
+        // Cleanup interval on component unmount
         return () => clearInterval(slideInterval);
     }, [nextSlide, slideDelay]);
 
@@ -47,6 +70,7 @@ export default function Carousel({ slides, slideDelay }: CarouselProps) {
             role="region"
             aria-label="Image Carousel"
         >
+            {/* Slide container */}
             <div
                 id="slides"
                 style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
@@ -55,6 +79,7 @@ export default function Carousel({ slides, slideDelay }: CarouselProps) {
                 aria-label={`Slide ${currentIndex + 1}`}
             ></div>
 
+            {/* Previous slide button */}
             <button
                 id="left-arrow-button"
                 className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[50%] left-10 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer"
@@ -64,6 +89,7 @@ export default function Carousel({ slides, slideDelay }: CarouselProps) {
                 <BsChevronCompactLeft size={30} />
             </button>
 
+            {/* Next slide button */}
             <button
                 id="right-arrow-button"
                 className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[50%] right-10 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer"
@@ -73,6 +99,7 @@ export default function Carousel({ slides, slideDelay }: CarouselProps) {
                 <BsChevronCompactRight size={30} />
             </button>
 
+            {/* Slide navigation buttons */}
             <div
                 id="carousel-navigation"
                 className="flex top-4 justify-center py-2"
