@@ -36,18 +36,18 @@ export default function Carousel() {
                 style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
                 className="w-full h-full rounded-2xl bg-center bg-cover duration-500"
             ></div>
-            <div
-                id="left-arrow-container"
+            <button
+                id="left-arrow-button"
                 className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer"
             >
                 <BsChevronCompactLeft onClick={prevSlide} size={30} />
-            </div>
-            <div
-                id="right-arrow-container"
+            </button>
+            <button
+                id="right-arrow-button"
                 className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer"
             >
                 <BsChevronCompactRight onClick={nextSlide} size={30} />
-            </div>
+            </button>
         </div>
     );
 }
