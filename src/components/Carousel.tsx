@@ -4,17 +4,16 @@ import { useState, useEffect, useCallback } from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import { RxDotFilled } from "react-icons/rx";
 
-export default function Carousel() {
-    const slides = [
-        { url: "https://picsum.photos/1400/780?random=1" },
-        { url: "https://picsum.photos/1400/780?random=2" },
-        { url: "https://picsum.photos/1400/780?random=3" },
-        { url: "https://picsum.photos/1400/780?random=4" },
-        { url: "https://picsum.photos/1400/780?random=5" },
-    ];
+type Slide = {
+    url: string;
+};
 
-    const slideDelay = 6;
+interface CarouselProps {
+    slides: Slide[];
+    slideDelay: number;
+}
 
+export default function Carousel({ slides, slideDelay }: CarouselProps) {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const prevSlide = () => {
@@ -40,8 +39,8 @@ export default function Carousel() {
 
         // Cleanup interval on component unmount
         return () => clearInterval(slideInterval);
-        // Re-run effect when currentIndex changes
-    }, [currentIndex, nextSlide]);
+        // Re-run effect when currentIndex or slideDelay changes
+    }, [currentIndex, nextSlide, slideDelay]);
 
     return (
         <div
