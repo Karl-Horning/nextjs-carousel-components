@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import { RxDotFilled } from "react-icons/rx";
 
@@ -13,6 +13,8 @@ export default function Carousel() {
         { url: "https://picsum.photos/1400/780?random=5" },
     ];
 
+    const slideDelay = 6;
+
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const prevSlide = () => {
@@ -21,15 +23,25 @@ export default function Carousel() {
         setCurrentIndex(newIndex);
     };
 
-    const nextSlide = () => {
+    const nextSlide = useCallback(() => {
         const isLastSlide = currentIndex === slides.length - 1;
         const newIndex = isLastSlide ? 0 : currentIndex + 1;
         setCurrentIndex(newIndex);
-    };
+    }, [currentIndex, slides.length]);
 
     const goToSlide = (slideIndex: number) => {
         setCurrentIndex(slideIndex);
     };
+
+    useEffect(() => {
+        const slideInterval = setInterval(() => {
+            nextSlide();
+        }, 1000 * slideDelay);
+
+        // Cleanup interval on component unmount
+        return () => clearInterval(slideInterval);
+        // Re-run effect when currentIndex changes
+    }, [currentIndex, nextSlide]);
 
     return (
         <div
