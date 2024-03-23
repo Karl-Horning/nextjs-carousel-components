@@ -44,16 +44,18 @@ export default function Carousel() {
 
             <button
                 id="left-arrow-button"
-                className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer"
+                className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[50%] left-10 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer"
+                onClick={prevSlide}
             >
-                <BsChevronCompactLeft onClick={prevSlide} size={30} />
+                <BsChevronCompactLeft size={30} />
             </button>
 
             <button
                 id="right-arrow-button"
-                className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer"
+                className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[50%] right-10 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer"
+                onClick={nextSlide}
             >
-                <BsChevronCompactRight onClick={nextSlide} size={30} />
+                <BsChevronCompactRight size={30} />
             </button>
 
             <div
@@ -62,7 +64,11 @@ export default function Carousel() {
             >
                 {slides.map((slide, slideIndex) => (
                     <button
-                        className="text-2xl cursor-pointer"
+                        className={`text-4xl cursor-pointer ${
+                            slideIndex === currentIndex
+                                ? "text-blue-500"
+                                : "text-gray-500"
+                        }`}
                         key={slide.url}
                         onClick={() => goToSlide(slideIndex)}
                     >
