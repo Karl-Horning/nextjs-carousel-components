@@ -89,6 +89,42 @@ export default function Carousel({ slides, slideDelay }: CarouselProps) {
         };
     }, [prevSlide, nextSlide]);
 
+    // Variable to store the starting X coordinate of the touch
+    let touchStartX = 0;
+
+    /**
+     * Event handler function for touch start event.
+     * Records the starting X coordinate of the touch.
+     * @param {React.TouchEvent} e - The touch event.
+     */
+    const handleTouchStart = (e: React.TouchEvent) => {
+        // Record the starting X coordinate of the touch
+        touchStartX = e.touches[0].clientX;
+    };
+
+    /**
+     * Event handler function for touch end event.
+     * Calculates the difference between the starting and ending X coordinates of the touch.
+     * Moves to the next or previous slide based on the touch difference.
+     * @param {React.TouchEvent} e - The touch event.
+     */
+    const handleTouchEnd = (e: React.TouchEvent) => {
+        // Retrieve the ending X coordinate of the touch
+        const touchEndX = e.changedTouches[0].clientX;
+
+        // Calculate the difference between the starting and ending X coordinates of the touch
+        const touchDiff = touchStartX - touchEndX;
+
+        // If the touch difference is greater than 50 pixels, move to the next slide
+        if (touchDiff > 50) {
+            nextSlide();
+        }
+        // If the touch difference is less than -50 pixels, move to the previous slide
+        else if (touchDiff < -50) {
+            prevSlide();
+        }
+    };
+
     return (
         <div
             id="carousel-container"
@@ -106,6 +142,8 @@ export default function Carousel({ slides, slideDelay }: CarouselProps) {
                     style={{ backgroundImage: `url(${slide.url})` }}
                     role="img"
                     aria-label={`Slide ${currentIndex + 1}`}
+                    onTouchStart={handleTouchStart}
+                    onTouchEnd={handleTouchEnd}
                 >
                     <div className="absolute bottom-[-7%] w-full text-center text-gray-500">
                         <p className="text-sm">{slide.caption}</p>
