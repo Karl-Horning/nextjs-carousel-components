@@ -31,11 +31,11 @@ export default function Carousel({ slides, slideDelay }: CarouselProps) {
     /**
      * Moves to the previous slide.
      */
-    const prevSlide = () => {
+    const prevSlide = useCallback(() => {
         setCurrentIndex((prevIndex) =>
             prevIndex === 0 ? slides.length - 1 : prevIndex - 1
         );
-    };
+    }, [slides.length]);
 
     /**
      * Moves to the next slide.
@@ -63,6 +63,31 @@ export default function Carousel({ slides, slideDelay }: CarouselProps) {
         // Cleanup interval on component unmount
         return () => clearInterval(slideInterval);
     }, [nextSlide, slideDelay]);
+
+    // Effect to handle left and right arrows being used for slide transition
+    useEffect(() => {
+        /**
+         * Event handler function to handle keyboard key press.
+         * Calls `prevSlide` function on left arrow key press and `nextSlide` function on right arrow key press.
+         * @param {KeyboardEvent} event - The keyboard event.
+         */
+        const handleKeyPress = (event: KeyboardEvent) => {
+            // Use the 'key' property to check which key is pressed
+            if (event.key === "ArrowLeft") {
+                prevSlide();
+            } else if (event.key === "ArrowRight") {
+                nextSlide();
+            }
+        };
+
+        // Add event listener for keydown event
+        document.addEventListener("keydown", handleKeyPress);
+
+        // Cleanup: remove event listener when component unmounts
+        return () => {
+            document.removeEventListener("keydown", handleKeyPress);
+        };
+    }, [prevSlide, nextSlide]);
 
     return (
         <div
@@ -94,6 +119,9 @@ export default function Carousel({ slides, slideDelay }: CarouselProps) {
                 className="h-[100%] absolute left-0 top-1/2 p-4 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white hover:text-amber-500 cursor-pointer"
                 onClick={prevSlide}
                 aria-label="Previous Slide"
+                onKeyDown={() => {
+                    console.log("Clicked!");
+                }}
             >
                 <BsChevronCompactLeft size={30} />
             </button>
