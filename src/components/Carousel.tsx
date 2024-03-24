@@ -81,8 +81,8 @@ export default function Carousel({ slides, slideDelay }: CarouselProps) {
 
             {/* Previous slide button */}
             <button
-                id="left-arrow-button"
-                className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[50%] left-10 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer"
+                id="previous-arrow-button"
+                className="absolute top-[50%] -translate-x-0 translate-y-[50%] left-10 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer"
                 onClick={prevSlide}
                 aria-label="Previous Slide"
             >
@@ -91,8 +91,8 @@ export default function Carousel({ slides, slideDelay }: CarouselProps) {
 
             {/* Next slide button */}
             <button
-                id="right-arrow-button"
-                className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[50%] right-10 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer"
+                id="next-arrow-button"
+                className="absolute top-[50%] -translate-x-0 translate-y-[50%] right-10 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer"
                 onClick={nextSlide}
                 aria-label="Next Slide"
             >
