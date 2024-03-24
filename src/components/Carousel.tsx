@@ -9,9 +9,7 @@ import { RxDotFilled } from "react-icons/rx";
  */
 type Slide = {
     url: string;
-    title?: string;
     caption?: string;
-    link?: string;
 };
 
 /**
@@ -84,19 +82,8 @@ export default function Carousel({ slides, slideDelay }: CarouselProps) {
                     role="img"
                     aria-label={`Slide ${currentIndex + 1}`}
                 >
-                    <div className="absolute inset-0 flex flex-col justify-center items-center text-white text-outline-black">
-                        <h2 className="text-4xl py-4 font-bold">
-                            {slide.title}
-                        </h2>
-                        <p className="text-2xl">{slide.caption}</p>
-                        <p className="py-4">
-                            <a
-                                href={slide.link}
-                                className="text-cyan-600 hover:text-cyan-400"
-                            >
-                                Read More
-                            </a>
-                        </p>
+                    <div className="absolute bottom-[-7%] w-full text-center text-gray-500">
+                        <p className="text-sm">{slide.caption}</p>
                     </div>
                 </div>
             ))}
@@ -124,7 +111,7 @@ export default function Carousel({ slides, slideDelay }: CarouselProps) {
             {/* Slide navigation buttons */}
             <div
                 id="carousel-navigation"
-                className="flex top-4 justify-center py-2"
+                className="flex top-4 justify-center py-2 mt-12"
                 role="tablist"
                 aria-label="Slide Navigation"
             >
