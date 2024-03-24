@@ -154,7 +154,7 @@ export default function Carousel({ slides, slideDelay }: CarouselProps) {
             {/* Previous slide button */}
             <button
                 id="previous-button"
-                className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 h-[100%] absolute left-0 top-1/2 p-4 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white hover:text-amber-500 cursor-pointer"
+                className="hidden lg:block opacity-0 group-hover:opacity-100 transition-opacity duration-500 h-[100%] absolute left-0 top-1/2 p-4 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white hover:text-amber-500 cursor-pointer"
                 onClick={prevSlide}
                 aria-label="Previous Slide"
             >
@@ -164,7 +164,7 @@ export default function Carousel({ slides, slideDelay }: CarouselProps) {
             {/* Next slide button */}
             <button
                 id="next-button"
-                className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 h-[100%] absolute right-0 top-1/2 p-4 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white hover:text-amber-500 cursor-pointer"
+                className="hidden lg:block opacity-0 group-hover:opacity-100 transition-opacity duration-500 h-[100%] absolute right-0 top-1/2 p-4 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white hover:text-amber-500 cursor-pointer"
                 onClick={nextSlide}
                 aria-label="Previous Slide"
             >
