@@ -9,6 +9,9 @@ import { RxDotFilled } from "react-icons/rx";
  */
 type Slide = {
     url: string;
+    title?: string;
+    caption?: string;
+    link?: string;
 };
 
 /**
@@ -66,23 +69,42 @@ export default function Carousel({ slides, slideDelay }: CarouselProps) {
     return (
         <div
             id="carousel-container"
-            className="max-w-[1400px] h-[780px] w-full m-auto py-16 px-4 relative group"
+            className="h-[600px] w-full m-auto relative group"
             role="region"
             aria-label="Image Carousel"
         >
-            {/* Slide container */}
-            <div
-                id="slides"
-                style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
-                className="w-full h-full rounded-2xl bg-center bg-cover duration-500"
-                role="img"
-                aria-label={`Slide ${currentIndex + 1}`}
-            ></div>
+            {slides.map((slide, slideIndex) => (
+                <div
+                    // Slide container
+                    key={slide.url}
+                    className={`relative w-full h-full bg-center bg-cover duration-500 ${
+                        slideIndex === currentIndex ? "" : "hidden"
+                    }`}
+                    style={{ backgroundImage: `url(${slide.url})` }}
+                    role="img"
+                    aria-label={`Slide ${currentIndex + 1}`}
+                >
+                    <div className="absolute inset-0 flex flex-col justify-center items-center text-white text-outline-black">
+                        <h2 className="text-4xl py-4 font-bold">
+                            {slide.title}
+                        </h2>
+                        <p className="text-2xl">{slide.caption}</p>
+                        <p className="py-4">
+                            <a
+                                href={slide.link}
+                                className="text-cyan-600 hover:text-cyan-400"
+                            >
+                                Read More
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            ))}
 
             {/* Previous slide button */}
             <button
-                id="previous-arrow-button"
-                className="absolute top-[50%] -translate-x-0 translate-y-[50%] left-10 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer"
+                id="previous-button"
+                className="h-[100%] absolute left-0 top-1/2 p-4 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white hover:text-amber-500 cursor-pointer"
                 onClick={prevSlide}
                 aria-label="Previous Slide"
             >
@@ -91,10 +113,10 @@ export default function Carousel({ slides, slideDelay }: CarouselProps) {
 
             {/* Next slide button */}
             <button
-                id="next-arrow-button"
-                className="absolute top-[50%] -translate-x-0 translate-y-[50%] right-10 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer"
+                id="next-button"
+                className="h-[100%] absolute right-0 top-1/2 p-4 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white hover:text-amber-500 cursor-pointer"
                 onClick={nextSlide}
-                aria-label="Next Slide"
+                aria-label="Previous Slide"
             >
                 <BsChevronCompactRight size={30} />
             </button>
