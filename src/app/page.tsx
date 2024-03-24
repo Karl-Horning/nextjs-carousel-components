@@ -1,4 +1,4 @@
-import Carousel from "@/components/Carousel";
+import PhotoCarousel from "@/components/PhotoCarousel/PhotoCarousel";
 
 const slides = [
     {
@@ -21,8 +21,16 @@ const slides = [
         url: "https://picsum.photos/1400/780?random=5",
         caption: "The fifth slide",
     },
+    {
+        url: "https://picsum.photos/1400/780?random=6",
+        caption: "The sixth slide",
+    },
 ];
 
 export default function Home() {
-    return <Carousel slides={slides} slideDelay={6} />;
+    return (
+        <>
+            <PhotoCarousel slides={slides} slideDelay={10} />
+        </>
+    );
 }

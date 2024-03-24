@@ -13,19 +13,19 @@ type Slide = {
 };
 
 /**
- * Props for the Carousel component.
+ * Props for the Photo Carousel component.
  */
-interface CarouselProps {
+interface PhotoCarouselProps {
     slides: Slide[]; // Array of slides to display in the carousel
     slideDelay: number; // Delay between slides in seconds
 }
 
 /**
- * Carousel component.
- * @param {CarouselProps} slides - Array of slides to display.
- * @param {CarouselProps} slideDelay - Delay between slides in seconds.
+ * PhotoCarousel component.
+ * @param {PhotoCarouselProps} slides - Array of slides to display.
+ * @param {PhotoCarouselProps} slideDelay - Delay between slides in seconds.
  */
-export default function Carousel({ slides, slideDelay }: CarouselProps) {
+export default function PhotoCarousel({ slides, slideDelay }: PhotoCarouselProps) {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     /**
@@ -127,7 +127,7 @@ export default function Carousel({ slides, slideDelay }: CarouselProps) {
 
     return (
         <div
-            id="carousel-container"
+            id="photo-carousel-container"
             className="h-[600px] w-full m-auto relative group"
             role="region"
             aria-label="Image Carousel"
@@ -173,7 +173,7 @@ export default function Carousel({ slides, slideDelay }: CarouselProps) {
 
             {/* Slide navigation buttons */}
             <div
-                id="carousel-navigation"
+                id="photo-carousel-navigation"
                 className="flex top-4 justify-center py-2 mt-12"
                 role="tablist"
                 aria-label="Slide Navigation"
