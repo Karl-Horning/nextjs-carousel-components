@@ -128,7 +128,7 @@ export default function PhotoCarousel({ slides, slideDelay }: PhotoCarouselProps
     return (
         <div
             id="photo-carousel-container"
-            className="h-[600px] w-full m-auto relative group"
+            className="h-[600px] w-full m-auto relative group  mb-28 mt-9"
             role="region"
             aria-label="Image Carousel"
         >
