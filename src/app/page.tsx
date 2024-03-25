@@ -1,3 +1,4 @@
+import FlexPhotoCarousel from "@/components/FlexPhotoCarousel/FlexPhotoCarousel";
 import PhotoCarousel from "@/components/PhotoCarousel/PhotoCarousel";
 
 const slides = [
@@ -30,6 +31,9 @@ const slides = [
 export default function Home() {
     return (
         <>
+            <div className="container mx-auto" style={{ aspectRatio: "10/6" }}>
+                <FlexPhotoCarousel slides={slides} slideDelay={10} />
+            </div>
             <PhotoCarousel slides={slides} slideDelay={10} />
         </>
     );
