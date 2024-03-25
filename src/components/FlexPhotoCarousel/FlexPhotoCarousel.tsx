@@ -36,8 +36,12 @@ export default function FlexPhotoCarousel({
     };
 
     return (
-        <div className="w-full h-full relative">
-            <div className="w-full h-full flex" style={{ overflow: "hidden" }}>
+        <div id="flex-photo-carousel" className="w-full h-full relative">
+            <div
+                id="slide-container"
+                className="w-full h-full flex"
+                style={{ overflow: "hidden" }}
+            >
                 {slides.map((slide) => (
                     <Image
                         className="w-full h-full object-cover block box-border flex-shrink-0 flex-grow-0 transition-all delay-300 ease-in-out"
@@ -52,12 +56,14 @@ export default function FlexPhotoCarousel({
                 ))}
             </div>
             <button
+                id="prev-button"
                 onClick={showPrevSlide}
                 className={`${style["slide-button"]} block absolute top-0 bottom-0 p-4 cursor-pointer left-0 hover:bg-black/10 transition-colors duration-100 ease-in-out`}
             >
                 <LuArrowBigLeft className="fill-black stroke-white h-8 w-8" />
             </button>
             <button
+                id="next-button"
                 onClick={showNextSlide}
                 className={`${style["slide-button"]} block absolute top-0 bottom-0 p-4 cursor-pointer right-0 hover:bg-black/10 transition-colors duration-100 ease-in-out`}
             >
