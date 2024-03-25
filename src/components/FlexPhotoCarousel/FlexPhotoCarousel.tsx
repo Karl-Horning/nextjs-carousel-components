@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { LuArrowBigLeft, LuArrowBigRight } from "react-icons/lu";
+import style from "./FlexPhotoCarousel.module.css";
 
 /**
  * Represents a slide with its URL.
@@ -52,13 +53,13 @@ export default function FlexPhotoCarousel({
             </div>
             <button
                 onClick={showPrevSlide}
-                className="slide-button block absolute top-0 bottom-0 p-4 cursor-pointer left-0 hover:bg-black/10 transition-colors duration-100 ease-in-out"
+                className={`${style["slide-button"]} block absolute top-0 bottom-0 p-4 cursor-pointer left-0 hover:bg-black/10 transition-colors duration-100 ease-in-out`}
             >
                 <LuArrowBigLeft className="fill-black stroke-white h-8 w-8" />
             </button>
             <button
                 onClick={showNextSlide}
-                className="slide-button block absolute top-0 bottom-0 p-4 cursor-pointer right-0 hover:bg-black/10 transition-colors duration-100 ease-in-out"
+                className={`${style["slide-button"]} block absolute top-0 bottom-0 p-4 cursor-pointer right-0 hover:bg-black/10 transition-colors duration-100 ease-in-out`}
             >
                 <LuArrowBigRight className="fill-black stroke-white h-8 w-8" />
             </button>
