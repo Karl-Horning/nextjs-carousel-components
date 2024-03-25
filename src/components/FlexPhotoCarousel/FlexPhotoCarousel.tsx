@@ -10,7 +10,7 @@ import style from "./FlexPhotoCarousel.module.css";
  */
 type Slide = {
     url: string;
-    caption?: string;
+    alt?: string;
 };
 
 /**
@@ -45,7 +45,7 @@ export default function FlexPhotoCarousel({
                         width={1400}
                         layout="responsive"
                         src={slide.url}
-                        alt=""
+                        alt={slide.alt || ""}
                         key={slide.url}
                         style={{ translate: `${-100 * slideIndex}%` }}
                     />
