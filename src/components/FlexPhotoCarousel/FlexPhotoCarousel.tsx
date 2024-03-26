@@ -14,8 +14,8 @@ import style from "./FlexPhotoCarousel.module.css";
  * Represents a slide with its URL.
  */
 type Slide = {
-    url: string;
-    alt?: string;
+    url: string; // The URL of the slide image
+    alt?: string; // Optional alternate text for the image
 };
 
 /**
@@ -35,7 +35,7 @@ export default function FlexPhotoCarousel({
     slides,
     slideDelay,
 }: Readonly<FlexPhotoCarouselProps>) {
-    const [slideIndex, setSlideIndex] = useState(0);
+    const [slideIndex, setSlideIndex] = useState(0); // State to track current slide index
 
     /**
      * Moves to the previous slide.
@@ -152,6 +152,7 @@ export default function FlexPhotoCarousel({
                     />
                 ))}
             </div>
+
             <button
                 id="prev-button"
                 onClick={showPrevSlide}
@@ -163,6 +164,7 @@ export default function FlexPhotoCarousel({
                     className="fill-black stroke-white h-8 w-8"
                 />
             </button>
+
             <button
                 id="next-button"
                 onClick={showNextSlide}
@@ -174,6 +176,7 @@ export default function FlexPhotoCarousel({
                     className="fill-black stroke-white h-8 w-8"
                 />
             </button>
+
             <div
                 id="slide-navigation"
                 className="absolute bottom-2 left-[50%] translate-x-[-50%] translate-y-[-50%] flex gap-1"
