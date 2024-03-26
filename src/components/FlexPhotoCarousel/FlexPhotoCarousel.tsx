@@ -56,7 +56,6 @@ export default function FlexPhotoCarousel({
                         className="w-full h-full object-cover block box-border flex-shrink-0 flex-grow-0 transition-all delay-300 ease-in-out"
                         height={800}
                         width={1400}
-                        layout="responsive"
                         src={url}
                         alt={alt || ""}
                         aria-hidden={slideIndex !== index}
