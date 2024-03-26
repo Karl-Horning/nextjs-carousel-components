@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
     LuArrowBigLeft,
     LuArrowBigRight,
@@ -26,18 +26,104 @@ interface FlexPhotoCarouselProps {
     slideDelay: number; // Delay between slides in seconds
 }
 
+/**
+ * FlexPhotoCarousel component.
+ * @param {FlexPhotoCarouselProps} slides - Array of slides to display.
+ * @param {FlexPhotoCarouselProps} slideDelay - Delay between slides in seconds.
+ */
 export default function FlexPhotoCarousel({
     slides,
     slideDelay,
 }: Readonly<FlexPhotoCarouselProps>) {
     const [slideIndex, setSlideIndex] = useState(0);
 
-    const showPrevSlide = () => {
-        setSlideIndex((index) => (index === 0 ? slides.length - 1 : index - 1));
+    /**
+     * Moves to the previous slide.
+     */
+    const showPrevSlide = useCallback(() => {
+        setSlideIndex((prevIndex) =>
+            prevIndex === 0 ? slides.length - 1 : prevIndex - 1
+        );
+    }, [slides.length]);
+
+    /**
+     * Moves to the next slide.
+     */
+    const showNextSlide = useCallback(() => {
+        setSlideIndex((prevIndex) =>
+            prevIndex === slides.length - 1 ? 0 : prevIndex + 1
+        );
+    }, [slides.length]);
+
+    // Effect to handle automatic slide transition
+    useEffect(() => {
+        const slideInterval = setInterval(() => {
+            showNextSlide();
+        }, 1000 * slideDelay);
+
+        // Cleanup interval on component unmount
+        return () => clearInterval(slideInterval);
+    }, [showNextSlide, slideDelay]);
+
+    // Effect to handle left and right arrows being used for slide transition
+    useEffect(() => {
+        /**
+         * Event handler function to handle keyboard key press.
+         * Calls `showPrevSlide` function on left arrow key press and `showNextSlide` function on right arrow key press.
+         * @param {KeyboardEvent} event - The keyboard event.
+         */
+        const handleKeyPress = (event: KeyboardEvent) => {
+            // Use the 'key' property to check which key is pressed
+            if (event.key === "ArrowLeft") {
+                showPrevSlide();
+            } else if (event.key === "ArrowRight") {
+                showNextSlide();
+            }
+        };
+
+        // Add event listener for keydown event
+        document.addEventListener("keydown", handleKeyPress);
+
+        // Cleanup: remove event listener when component unmounts
+        return () => {
+            document.removeEventListener("keydown", handleKeyPress);
+        };
+    }, [showPrevSlide, showNextSlide]);
+
+    // Variable to store the starting X coordinate of the touch
+    let touchStartX = 0;
+
+    /**
+     * Event handler function for touch start event.
+     * Records the starting X coordinate of the touch.
+     * @param {React.TouchEvent} e - The touch event.
+     */
+    const handleTouchStart = (e: React.TouchEvent) => {
+        // Record the starting X coordinate of the touch
+        touchStartX = e.touches[0].clientX;
     };
 
-    const showNextSlide = () => {
-        setSlideIndex((index) => (index === slides.length - 1 ? 0 : index + 1));
+    /**
+     * Event handler function for touch end event.
+     * Calculates the difference between the starting and ending X coordinates of the touch.
+     * Moves to the next or previous slide based on the touch difference.
+     * @param {React.TouchEvent} e - The touch event.
+     */
+    const handleTouchEnd = (e: React.TouchEvent) => {
+        // Retrieve the ending X coordinate of the touch
+        const touchEndX = e.changedTouches[0].clientX;
+
+        // Calculate the difference between the starting and ending X coordinates of the touch
+        const touchDiff = touchStartX - touchEndX;
+
+        // If the touch difference is greater than 50 pixels, move to the next slide
+        if (touchDiff > 50) {
+            showNextSlide();
+        }
+        // If the touch difference is less than -50 pixels, move to the previous slide
+        else if (touchDiff < -50) {
+            showPrevSlide();
+        }
     };
 
     return (
@@ -61,6 +147,8 @@ export default function FlexPhotoCarousel({
                         aria-hidden={slideIndex !== index}
                         key={url}
                         style={{ translate: `${-100 * slideIndex}%` }}
+                        onTouchStart={handleTouchStart}
+                        onTouchEnd={handleTouchEnd}
                     />
                 ))}
             </div>
