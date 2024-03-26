@@ -1,5 +1,6 @@
 import FlexPhotoCarousel from "@/components/FlexPhotoCarousel/FlexPhotoCarousel";
 import PhotoCarousel from "@/components/PhotoCarousel/PhotoCarousel";
+import SkipLink from "@/components/SkipLink/SkipLink";
 
 const slides = [
     {
@@ -31,10 +32,26 @@ const slides = [
 export default function Home() {
     return (
         <>
-            <div className="container mx-auto" style={{ aspectRatio: "7/4" }}>
+            <SkipLink />
+            <div
+                className="container mx-auto mb-16"
+                style={{ aspectRatio: "7/4" }}
+            >
                 <FlexPhotoCarousel slides={slides} slideDelay={10} />
             </div>
-            {/* <PhotoCarousel slides={slides} slideDelay={10} /> */}
+            <PhotoCarousel slides={slides} slideDelay={10} />
+            <div className="container mx-auto pb-8">
+                <main id="main">
+                    <h1>Main Content!</h1>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Exercitationem molestias modi nobis sed enim minus
+                        mollitia soluta! Commodi est soluta cupiditate,
+                        consequuntur sapiente excepturi facilis labore dolor,
+                        nesciunt mollitia hic?
+                    </p>
+                </main>
+            </div>
         </>
     );
 }

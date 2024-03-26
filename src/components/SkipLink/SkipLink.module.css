@@ -1,0 +1,27 @@
+.skip-link {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+.skip-link:focus,
+.skip-link:hover,
+.skip-link:focus-visible {
+    background-color: white;
+    border: black 3px solid;
+    clip: unset;
+    color: black;
+    height: auto;
+    left: 0;
+    margin: 0;
+    padding: 1em;
+    text-decoration: none;
+    top: 0;
+    width: auto;
+    z-index: 100;
+}
