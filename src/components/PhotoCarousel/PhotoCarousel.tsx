@@ -126,10 +126,9 @@ export default function PhotoCarousel({ slides, slideDelay }: PhotoCarouselProps
     };
 
     return (
-        <div
+        <section
             id="photo-carousel-container"
             className="h-[600px] w-full m-auto relative group  mb-28 mt-9"
-            role="region"
             aria-label="Image Carousel"
         >
             {slides.map((slide, slideIndex) => (
@@ -197,6 +196,6 @@ export default function PhotoCarousel({ slides, slideDelay }: PhotoCarouselProps
                     </button>
                 ))}
             </div>
-        </div>
+        </section>
     );
 }
