@@ -1,5 +1,11 @@
-.slide-button:hover > * {
+.slide-button:hover > *,
+.slide-button:focus-visible > * {
     animation: squish 200ms ease-in-out;
+}
+
+.slide-pagination:hover > *,
+.slide-pagination:focus-visible > * {
+    scale: 1.2;
 }
 
 @keyframes squish {
