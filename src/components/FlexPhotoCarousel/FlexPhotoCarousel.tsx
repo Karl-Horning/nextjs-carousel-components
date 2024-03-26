@@ -29,7 +29,7 @@ interface FlexPhotoCarouselProps {
 export default function FlexPhotoCarousel({
     slides,
     slideDelay,
-}: FlexPhotoCarouselProps) {
+}: Readonly<FlexPhotoCarouselProps>) {
     const [slideIndex, setSlideIndex] = useState(0);
 
     const showPrevSlide = () => {
@@ -91,11 +91,11 @@ export default function FlexPhotoCarousel({
                 id="slide-navigation"
                 className="absolute bottom-2 left-[50%] translate-x-[-50%] translate-y-[-50%] flex gap-1"
             >
-                {slides.map((_, index) => (
+                {slides.map(({ url }, index) => (
                     <button
                         className={`${style["slide-pagination"]} h-4 w-4 block`}
                         onClick={() => setSlideIndex(index)}
-                        key={index}
+                        key={url}
                         aria-label={`View slide ${index + 1}`}
                     >
                         {index === slideIndex ? (
