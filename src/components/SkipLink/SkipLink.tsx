@@ -2,8 +2,8 @@ import style from "./SkipLink.module.css";
 
 export default function SkipLink() {
     return (
-        <a href="#main" className={style["skip-link"]}>
-            Skip to content
+        <a id="skip-link" tabIndex={0} href="#main" className={style["skip-link"]}>
+            Skip to main content
         </a>
     );
 }
