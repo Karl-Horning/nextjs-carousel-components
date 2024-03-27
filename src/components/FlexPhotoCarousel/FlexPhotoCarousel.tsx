@@ -130,16 +130,16 @@ export default function FlexPhotoCarousel({
         <section
             id="flex-photo-carousel"
             aria-label="Photo Carousel"
-            className="w-full h-full relative"
+            className="relative h-full w-full"
         >
             <div
                 id="slide-container"
-                className="w-full h-full flex"
+                className="flex h-full w-full"
                 style={{ overflow: "hidden" }}
             >
                 {slides.map(({ url, alt }, index) => (
                     <Image
-                        className="w-full h-full object-cover block box-border flex-shrink-0 flex-grow-0 transition-all delay-300 ease-in-out"
+                        className="box-border block h-full w-full flex-shrink-0 flex-grow-0 object-cover transition-all delay-300 ease-in-out"
                         height={800}
                         width={1400}
                         src={url}
@@ -156,34 +156,34 @@ export default function FlexPhotoCarousel({
             <button
                 id="prev-button"
                 onClick={showPrevSlide}
-                className={`${style["slide-button"]} block absolute top-0 bottom-0 p-4 cursor-pointer left-0 hover:bg-black/10 focus-visible:bg-black/10 transition-colors duration-100 ease-in-out`}
+                className={`${style["slide-button"]} absolute bottom-0 left-0 top-0 block cursor-pointer p-4 transition-colors duration-100 ease-in-out hover:bg-black/10 focus-visible:bg-black/10`}
                 aria-label="View previous slide"
             >
                 <LuArrowBigLeft
                     aria-hidden
-                    className="fill-black stroke-white h-8 w-8"
+                    className="h-8 w-8 fill-black stroke-white"
                 />
             </button>
 
             <button
                 id="next-button"
                 onClick={showNextSlide}
-                className={`${style["slide-button"]} block absolute top-0 bottom-0 p-4 cursor-pointer right-0 hover:bg-black/10 focus-visible:bg-black/10 transition-colors duration-100 ease-in-out`}
+                className={`${style["slide-button"]} absolute bottom-0 right-0 top-0 block cursor-pointer p-4 transition-colors duration-100 ease-in-out hover:bg-black/10 focus-visible:bg-black/10`}
                 aria-label="View next slide"
             >
                 <LuArrowBigRight
                     aria-hidden
-                    className="fill-black stroke-white h-8 w-8"
+                    className="h-8 w-8 fill-black stroke-white"
                 />
             </button>
 
             <div
                 id="slide-navigation"
-                className="absolute bottom-2 left-[50%] translate-x-[-50%] translate-y-[-50%] flex gap-1"
+                className="absolute bottom-2 left-[50%] flex translate-x-[-50%] translate-y-[-50%] gap-1"
             >
                 {slides.map(({ url }, index) => (
                     <button
-                        className={`${style["slide-pagination"]} h-4 w-4 block`}
+                        className={`${style["slide-pagination"]} block h-4 w-4`}
                         onClick={() => setSlideIndex(index)}
                         key={url}
                         aria-label={`View slide ${index + 1}`}
@@ -191,12 +191,12 @@ export default function FlexPhotoCarousel({
                         {index === slideIndex ? (
                             <LuCircleDot
                                 aria-hidden
-                                className="stroke-white fill-black h-full w-full"
+                                className="h-full w-full fill-black stroke-white"
                             />
                         ) : (
                             <LuCircle
                                 aria-hidden
-                                className="stroke-white fill-black h-full w-full"
+                                className="h-full w-full fill-black stroke-white"
                             />
                         )}
                     </button>

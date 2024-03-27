@@ -25,7 +25,10 @@ interface PhotoCarouselProps {
  * @param {PhotoCarouselProps} slides - Array of slides to display.
  * @param {PhotoCarouselProps} slideDelay - Delay between slides in seconds.
  */
-export default function PhotoCarousel({ slides, slideDelay }: PhotoCarouselProps) {
+export default function PhotoCarousel({
+    slides,
+    slideDelay,
+}: PhotoCarouselProps) {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     /**
@@ -128,14 +131,14 @@ export default function PhotoCarousel({ slides, slideDelay }: PhotoCarouselProps
     return (
         <section
             id="photo-carousel-container"
-            className="h-[600px] w-full m-auto relative group  mb-28 mt-9"
+            className="group relative m-auto mb-28 mt-9  h-[600px] w-full"
             aria-label="Image Carousel"
         >
             {slides.map((slide, slideIndex) => (
                 <div
                     // Slide container
                     key={slide.url}
-                    className={`relative w-full h-full bg-center bg-cover duration-500 ${
+                    className={`relative h-full w-full bg-cover bg-center duration-500 ${
                         slideIndex === currentIndex ? "" : "hidden"
                     }`}
                     style={{ backgroundImage: `url(${slide.url})` }}
@@ -153,7 +156,7 @@ export default function PhotoCarousel({ slides, slideDelay }: PhotoCarouselProps
             {/* Previous slide button */}
             <button
                 id="previous-button"
-                className="hidden lg:block opacity-0 group-hover:opacity-100 transition-opacity duration-500 h-[100%] absolute left-0 top-1/2 p-4 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white hover:text-amber-500 cursor-pointer"
+                className="absolute left-0 top-1/2 hidden h-[100%] -translate-y-1/2 cursor-pointer bg-black/30 p-4 text-white opacity-0 transition-opacity duration-500 hover:bg-black/50 hover:text-amber-500 group-hover:opacity-100 lg:block"
                 onClick={prevSlide}
                 aria-label="Previous Slide"
             >
@@ -163,7 +166,7 @@ export default function PhotoCarousel({ slides, slideDelay }: PhotoCarouselProps
             {/* Next slide button */}
             <button
                 id="next-button"
-                className="hidden lg:block opacity-0 group-hover:opacity-100 transition-opacity duration-500 h-[100%] absolute right-0 top-1/2 p-4 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white hover:text-amber-500 cursor-pointer"
+                className="absolute right-0 top-1/2 hidden h-[100%] -translate-y-1/2 cursor-pointer bg-black/30 p-4 text-white opacity-0 transition-opacity duration-500 hover:bg-black/50 hover:text-amber-500 group-hover:opacity-100 lg:block"
                 onClick={nextSlide}
                 aria-label="Previous Slide"
             >
@@ -173,14 +176,14 @@ export default function PhotoCarousel({ slides, slideDelay }: PhotoCarouselProps
             {/* Slide navigation buttons */}
             <div
                 id="photo-carousel-navigation"
-                className="flex top-4 justify-center py-2 mt-12"
+                className="top-4 mt-12 flex justify-center py-2"
                 role="tablist"
                 aria-label="Slide Navigation"
             >
                 {slides.map((slide, slideIndex) => (
                     <button
                         key={slide.url}
-                        className={`text-4xl cursor-pointer ${
+                        className={`cursor-pointer text-4xl ${
                             slideIndex === currentIndex
                                 ? "text-blue-500"
                                 : "text-gray-500"
